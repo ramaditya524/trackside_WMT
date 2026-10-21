@@ -32,6 +32,9 @@ body{background:var(--night);color:var(--ink);font-family:var(--body);overflow:h
 .lbl.pl{background:none;border-color:transparent;color:rgba(233,239,247,.82);font-weight:500;font-size:11px;letter-spacing:.1em;text-shadow:0 1px 3px rgba(0,0,0,.95),0 0 8px rgba(0,0,0,.6)}
 .lbl.pl.l{color:#ffe7b0}
 .lbl.pl.w{color:#a9d4f5;font-style:italic;text-transform:none;letter-spacing:.04em;font-size:12px}
+.edge{position:absolute;left:0;top:0;display:flex;align-items:center;gap:6px;font:500 11px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:rgba(12,18,29,.78);border:1px solid var(--line);border-radius:999px;padding:4px 9px 4px 6px;white-space:nowrap}
+.edge i{display:block;width:0;height:0;border-left:7px solid var(--amber);border-top:4px solid transparent;border-bottom:4px solid transparent}
+.edge em{font-style:normal;color:var(--muted);font-family:var(--mono);letter-spacing:0;text-transform:none}
 .lbl.pl.near{color:#fff;font-weight:600}
 .where{font-size:14px;color:var(--ink);display:flex;align-items:center;gap:6px}
 .where::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 3px rgba(243,181,68,.2)}
@@ -973,13 +976,48 @@ const PLACES=[
 ["Welland Canal",43.1700,-79.2050,"w"],["Horseshoe Falls",43.0779,-79.0757,"l"],["Niagara Escarpment",43.2380,-79.6500,"w"],["Kelso Conservation Area",43.5050,-79.9440,"w"],
 ["Limehouse",43.6330,-79.9800,"n"],["University of Guelph",43.5320,-80.2260,"l"],["Waterloo",43.4643,-80.5204,"n"],["Ontario Place",43.6286,-79.4157,"l"],
 ["Billy Bishop Airport",43.6275,-79.3962,"l"],["Toronto Islands",43.6200,-79.3780,"w"],["Lake Ontario",43.5000,-79.3500,"w"],["Mississauga",43.5890,-79.6440,"n"],["Brampton",43.6850,-79.7600,"n"],
-["Markham",43.8561,-79.3370,"n"],["Richmond Hill",43.8828,-79.4403,"n"],["Burlington",43.3255,-79.7990,"n"],["Hamilton",43.2557,-79.8711,"n"],["St. Catharines",43.1594,-79.2469,"n"],["Ajax",43.8509,-79.0204,"n"],["Pickering",43.8384,-79.0868,"n"]
+["Markham",43.8561,-79.3370,"n"],["Richmond Hill",43.8828,-79.4403,"n"],["Burlington",43.3255,-79.7990,"n"],["Hamilton",43.2557,-79.8711,"n"],["St. Catharines",43.1594,-79.2469,"n"],["Ajax",43.8509,-79.0204,"n"],["Pickering",43.8384,-79.0868,"n"],
+["Kensington Market",43.6545,-79.4005,"n"],["Chinatown",43.6529,-79.3980,"n"],["Trinity Bellwoods",43.6470,-79.4140,"l"],["Little Italy",43.6550,-79.4140,"n"],
+["Little Portugal",43.6490,-79.4300,"n"],["Dufferin Grove",43.6560,-79.4330,"n"],["Brockton Village",43.6510,-79.4400,"n"],["West Queen West",43.6440,-79.4220,"n"],
+["King West",43.6440,-79.4000,"n"],["Entertainment District",43.6465,-79.3895,"n"],["Queen's Park",43.6620,-79.3920,"l"],["University of Toronto",43.6629,-79.3957,"l"],
+["Church–Wellesley",43.6650,-79.3810,"n"],["Cabbagetown",43.6670,-79.3660,"n"],["Regent Park",43.6600,-79.3610,"n"],["Moss Park",43.6550,-79.3680,"n"],
+["St. James Town",43.6700,-79.3740,"n"],["Rosedale",43.6800,-79.3800,"n"],["Summerhill",43.6820,-79.3910,"n"],["Forest Hill",43.6950,-79.4140,"n"],
+["Yonge–Eglinton",43.7070,-79.3980,"n"],["Davisville",43.6980,-79.3970,"n"],["Mount Pleasant Cemetery",43.6950,-79.3830,"w"],["Wychwood",43.6810,-79.4230,"n"],
+["Corso Italia",43.6780,-79.4440,"n"],["Earlscourt",43.6780,-79.4520,"n"],["Swansea",43.6420,-79.4800,"n"],["Bloor West Village",43.6500,-79.4850,"n"],
+["Baby Point",43.6550,-79.4960,"n"],["Humber River",43.6620,-79.4990,"w"],["Old Mill",43.6490,-79.4930,"l"],["The Kingsway",43.6510,-79.5080,"n"],
+["Lambton",43.6680,-79.5000,"n"],["Alderwood",43.6010,-79.5400,"n"],["The Queensway",43.6230,-79.5050,"n"],["Eatonville",43.6400,-79.5450,"n"],
+["Richview",43.6800,-79.5400,"n"],["Thistletown",43.7350,-79.5650,"n"],["Emery",43.7400,-79.5400,"n"],["Humber Summit",43.7600,-79.5600,"n"],
+["Downsview Airport",43.7420,-79.4720,"l"],["Yorkdale",43.7254,-79.4520,"l"],["Lawrence Heights",43.7220,-79.4400,"n"],["Lawrence Park",43.7230,-79.4000,"n"],
+["York Mills",43.7450,-79.4050,"n"],["North York Centre",43.7680,-79.4130,"n"],["Willowdale",43.7800,-79.4160,"n"],["Bayview Village",43.7690,-79.3850,"n"],
+["Don Mills",43.7350,-79.3420,"n"],["Flemingdon Park",43.7170,-79.3330,"n"],["Ontario Science Centre",43.7166,-79.3389,"l"],["Victoria Village",43.7300,-79.3150,"n"],
+["East York",43.6900,-79.3300,"n"],["Crescent Town",43.6950,-79.2920,"n"],["Woodbine Beach",43.6630,-79.3070,"w"],["Upper Beaches",43.6800,-79.3100,"n"],
+["Oakridge",43.6930,-79.2830,"n"],["Clairlea",43.7140,-79.2830,"n"],["Kennedy Park",43.7260,-79.2620,"n"],["Wexford",43.7450,-79.2970,"n"],
+["Dorset Park",43.7570,-79.2780,"n"],["Bendale",43.7600,-79.2550,"n"],["Woburn",43.7700,-79.2300,"n"],["Guild Park",43.7480,-79.1950,"l"],
+["Highland Creek",43.7850,-79.1750,"n"],["Malvern",43.8060,-79.2220,"n"],["Morningside Heights",43.8230,-79.2150,"n"],["Scarborough Village",43.7400,-79.2150,"n"],
+["Ashbridges Bay",43.6620,-79.3100,"w"],["Riverside",43.6600,-79.3500,"n"],["Sugar Beach",43.6430,-79.3670,"l"],
+["Mineola",43.5700,-79.5900,"n"],["Applewood",43.6100,-79.5900,"n"],["Heartland Town Centre",43.6150,-79.6900,"l"],["Churchill Meadows",43.5450,-79.7550,"n"],
+["Lorne Park",43.5340,-79.6060,"n"],["Sheridan",43.5240,-79.6600,"n"],["Springdale",43.7630,-79.7400,"n"],["Credit River",43.5800,-79.6200,"w"],["Etobicoke Creek",43.6300,-79.5800,"w"],
+["Glen Abbey",43.4400,-79.7300,"n"],["Bronte Harbour",43.3930,-79.7120,"n"],["Kerr Village",43.4400,-79.6900,"n"],["Sheridan College",43.4690,-79.6990,"l"],
+["Sixteen Mile Creek",43.4500,-79.6800,"w"],["Tyandaga",43.3530,-79.8360,"n"],["Mount Nemo",43.4310,-79.8800,"w"],["LaSalle Park",43.3000,-79.8450,"l"],
+["Rattlesnake Point",43.4700,-79.9100,"w"],["Mattamy Cycling Centre",43.4950,-79.8700,"l"],["Glen Williams",43.6850,-79.9300,"n"],
+["Westdale",43.2620,-79.9050,"n"],["Dundas",43.2650,-79.9550,"n"],["Bayfront Park",43.2730,-79.8720,"l"],["James Street North",43.2620,-79.8660,"n"],
+["Hamilton Mountain",43.2350,-79.8700,"w"],["Gage Park",43.2410,-79.8290,"l"],["Hamilton Beach",43.2850,-79.7800,"n"],["Vineland",43.1550,-79.3900,"n"],["Jordan",43.1460,-79.3700,"n"],
+["Port Dalhousie",43.2010,-79.2690,"n"],["Niagara-on-the-Lake",43.2550,-79.0710,"n"],["Queenston Heights",43.1600,-79.0520,"l"],["Clifton Hill",43.0910,-79.0750,"l"],
+["Niagara Gorge",43.1100,-79.0600,"w"],["Rainbow Bridge",43.0900,-79.0680,"l"],
+["Concord",43.8000,-79.4950,"n"],["Oak Ridges",43.9400,-79.4500,"n"],["Lake Wilcox",43.9500,-79.4380,"w"],["Main Street Markham",43.8770,-79.2620,"n"],
+["Cornell",43.8900,-79.2300,"n"],["Markville",43.8690,-79.2880,"l"],["Pacific Mall",43.8250,-79.3060,"l"],["Toogood Pond",43.8850,-79.3100,"w"],["Barrie Waterfront",44.3880,-79.6850,"n"],
+["Rouge Beach",43.7960,-79.1170,"w"],["Petticoat Creek",43.8000,-79.1100,"w"],["Pickering Town Centre",43.8360,-79.0850,"l"],["Bay Ridges",43.8130,-79.0750,"n"],
+["Ajax Waterfront",43.8250,-79.0050,"w"],["Pickering Village",43.8550,-79.0350,"n"],["Port Whitby",43.8600,-78.9350,"n"],["Oshawa Harbour",43.8700,-78.8350,"w"],
+["Ontario Tech University",43.9450,-78.8960,"l"],["Rockwood",43.6150,-80.1450,"n"],["Breslau",43.4700,-80.4150,"n"],["Victoria Park",43.4460,-80.4970,"l"],
+["Shakespeare",43.4080,-80.8260,"n"],["New Hamburg",43.3790,-80.7100,"n"],["Baden",43.4030,-80.6670,"n"],
+["Stratford Festival",43.3760,-80.9700,"l"],["Avon River",43.3700,-80.9800,"w"],["Speed River",43.5430,-80.2470,"w"],["Grand River",43.4100,-80.4300,"w"]
 ].map(([name,lat,lon,kind])=>{const x=(lon-LON0)*KX,y=(lat-LAT0)*KY;return {name,x,y,kind}})
   .filter(p=>!STN.some(s=>s.name===p.name));
 const LBL=STN.map(s=>{const d=document.createElement('div');d.className='lbl';d.textContent=s.name;$('labels').appendChild(d);return {el:d,w:s.name.length*7.4+16}});
 const LMLBL=LM_DEFS.filter(d=>d.label).map(d=>{const e=document.createElement('div');e.className='lbl lm';e.textContent=d.name;$('labels').appendChild(e);return {el:e,w:d.name.length*7.2+16,name:d.name}});
 const PLBL=PLACES.map(p=>{const e=document.createElement('div');e.className='lbl pl '+p.kind;e.textContent=p.name;e.hidden=true;$('labels').appendChild(e);return {el:e,w:p.name.length*(p.kind==='w'?6.6:7)+12,p}});
 const pAnchor=new V3();
+const EDGE=Array.from({length:PHONE?3:4},()=>{const e=document.createElement('div');e.className='edge';e.hidden=true;e.innerHTML='<i></i><span></span><em></em>';$('labels').appendChild(e);return e});
 function nearestPlace(xm,ym,maxD){let best=null,bd=maxD;PLACES.forEach(p=>{if(p.kind==='w'&&/Lake|Escarpment|Moraine/.test(p.name))return;const d=Math.hypot(p.x-xm,p.y-ym);if(d<bd){bd=d;best=p}});return best}
 let passing=null;
 const PRI=STN.map((s,i)=>i===UNION?0:(['Kitchener','Stratford','Niagara Falls','Allandale Waterfront','Durham College Oshawa','Old Elm','Bloomington','Milton','West Harbour','Hamilton Centre','Aurora','Barrie South'].includes(s.name)?1:2));
@@ -999,13 +1037,41 @@ function drawLabels(hot){
   order.forEach(i=>{const L=LBL[i];if(!STNW[i]){L.el.hidden=true;return}if(put(L,STNW[i]))L.el.classList.toggle('hot',i===hot)});
   LMLBL.forEach(L=>{const m=LANDMARKS.find(q=>q.name===L.name);if(!m||camera.zoom<0.12){L.el.hidden=true;return}put(L,m.pos)});
   // places fill the gaps once the view is under ~70 km across; the one the train is passing goes first
-  const viewKm=FW/camera.zoom/S/1000,showP=viewKm<70;
+  const viewKm=FW/camera.zoom/S/1000,showP=viewKm<90;
   const plist=passing?[PLBL.find(L=>L.p===passing)].concat(PLBL.filter(L=>L.p!==passing)):PLBL;
   plist.forEach(L=>{
     if(!showP||(L.p.kind==='w'&&/Lake Ontario|Lake Simcoe/.test(L.p.name)&&viewKm<8)){L.el.hidden=true;return}
     pAnchor.set(L.p.x*S,(gAt(L.p.x,L.p.y)-75)*SV+1.2,-L.p.y*S);
-    if(put(L,pAnchor))L.el.classList.toggle('near',L.p===passing);
+    L.on=put(L,pAnchor);if(L.on)L.el.classList.toggle('near',L.p===passing);
   });
+  // edge markers: nearest off-screen places around the followed train, pinned to the screen edge
+  EDGE.forEach(e=>e.hidden=true);
+  const tp=selKey&&trainPos.get(selKey);
+  if(tp&&(follow||ambient)&&viewKm<12){
+    const xm=tp.x/S,ym=-tp.z/S,cand=[];
+    PLBL.forEach(L=>{if(L.on||/Lake Ontario|Lake Simcoe|Escarpment|Moraine/.test(L.p.name))return;const d=Math.hypot(L.p.x-xm,L.p.y-ym);if(d<6000)cand.push({name:L.p.name,x:L.p.x,y:L.p.y,d})});
+    STN.forEach((st,i)=>{if(!STNW[i]||!LBL[i].el.hidden)return;const d=Math.hypot(st.x-xm,st.y-ym);if(d<6000)cand.push({name:st.name,x:st.x,y:st.y,d,stn:true})});
+    cand.sort((a,b)=>a.d-b.d);
+    const L0=(!ambient&&!isPhone()?insL:0)+10,R0=w-10,T0=topB+6,B0=h-(ambient?60:insB)-10,cx=(L0+R0)/2,cy=(T0+B0)/2;
+    let used=0;
+    for(const c of cand){
+      if(used>=EDGE.length)break;
+      pAnchor.set(c.x*S,(gAt(c.x,c.y)-75)*SV,-c.y*S).project(camera);
+      const px=(pAnchor.x+1)/2*w,py=(1-pAnchor.y)/2*h,dx=px-cx,dy=py-cy;
+      const tx=dx>0?(R0-cx)/dx:dx<0?(L0-cx)/dx:1e9,ty=dy>0?(B0-cy)/dy:dy<0?(T0-cy)/dy:1e9,t=Math.min(tx,ty);
+      if(t>=1)continue; // on screen after all
+      const e=EDGE[used],ex=cx+dx*t,ey=cy+dy*t;
+      e.children[1].textContent=c.name;e.children[2].textContent=(c.d/1000).toFixed(1)+' km';
+      e.hidden=false;const ew=e.offsetWidth||c.name.length*7+80,eh=e.offsetHeight||22;e.hidden=true;
+      let x=clamp(ex-ew/2,L0,R0-ew),y=clamp(ey-eh/2,T0,B0-eh);
+      const r={l:x,r:x+ew,t:y,b:y+eh};
+      if(placed.some(q=>r.l<q.r+4&&r.r>q.l-4&&r.t<q.b+2&&r.b>q.t-2)){y+=dy>0?-28:28;r.t=y;r.b=y+eh;if(placed.some(q=>r.l<q.r&&r.r>q.l&&r.t<q.b&&r.b>q.t))continue}
+      placed.push(r);e.hidden=false;e.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`;
+      e.children[0].style.transform=`rotate(${Math.atan2(dy,dx)}rad)`;
+      e.style.borderColor=c.stn?'var(--go)':'';
+      used++;
+    }
+  }
 }
 
 /* ================= State and UI ================= */
